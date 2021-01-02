@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"encoding/xml"
-	"github.com/google/uuid"
-	"github.com/package-url/packageurl-go"
 	"io"
 	"os/exec"
 	"strings"
+
+	"github.com/google/uuid"
+	"github.com/package-url/packageurl-go"
 )
 
 type Module struct {
@@ -95,7 +96,7 @@ func GenerateFromJSON(j []byte) (string, error) {
 func Generate() (string, error) {
 	var result string
 
-	cmd := exec.Command("go", "list", "-json", "-m", "all")
+	cmd := exec.Command("go", "list", "-json", "-mod=readonly", "all")
 	out, err := cmd.Output()
 
 	if err != nil {
